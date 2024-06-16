@@ -18,7 +18,7 @@
 
 <body>
     <div class="sidebar">
-        <img class="logo" src="<?= base_url('assets/img/Logo.png')?>" alt="Logo">
+        <img class="logo" src="<?= base_url('assets/img/Logo-home.png')?>" alt="Logo">
 
 
         <div class="menu-content">
