@@ -1,0 +1,172 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Poppins", sans-serif;
+	display: flex;
+	flex-direction: row;
+	background-color: #f0f0f0;
+}
+
+.sidebar {
+	width: 400px;
+	background-color: #ffffff;
+	border-right: 0.8px solid #8e8e8e;
+	color: #000000;
+	padding: 20px;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.logo {
+	width: 180px;
+	margin: 50px;
+}
+
+.menu-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 50px;
+	align-items: center;
+}
+
+.menu-item {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.menu-item img {
+	width: 25px;
+	margin-right: 10px;
+}
+
+.menu-item span {
+	font-weight: 600;
+}
+
+.menu-item-search img {
+	width: 25px;
+	margin-right: 10px;
+}
+
+.menu-item-search {
+	display: flex;
+	gap: 10px;
+	background-color: #d9d9d9;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	padding: 10px;
+	border-radius: 50px;
+	height: 75px;
+	width: 200px;
+}
+
+.user-info {
+	display: flex;
+	align-items: center;
+	margin-top: 15rem;
+	margin-bottom: 30px;
+	gap: 20px;
+}
+
+.user-info img {
+	width: 50px;
+	margin-right: 10px;
+}
+
+.user-info span {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.user-info .admin {
+	font-size: 14px;
+	font-weight: 500;
+	color: #333;
+}
+
+.user-info .logout-icon {
+	width: 30px;
+	margin-left: auto;
+}
+
+/* Konten tengah */
+.main-content {
+	flex: 1;
+	padding-left: 8rem;
+	padding-right: 8rem;
+	background-color: #fff;
+	display: flex;
+	justify-content: space-between;
+	height: 130px;
+	align-items: center;
+	border-bottom: 0.8px solid #8e8e8e;
+}
+
+.main-content h2 {
+	font-size: 24px;
+	margin: 0;
+	color: #333;
+}
+
+.wrapper-menu-content {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+	justify-content: center;
+}
+
+.menu-item-content-share {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #e8f1ff;
+	padding: 10px 20px;
+	width: 120px;
+	height: 45px;
+	border-radius: 50px;
+	gap: 10px;
+}
+
+.menu-item-content-share:hover {
+	background-color: #cde1ff;
+	transition: 0.5s;
+}
+
+.menu-item-content-share p {
+	margin: 0;
+	color: #333;
+	text-decoration: none;
+}
+
+.menu-item-content {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	gap: 10px;
+}
+
+.menu-item-content img {
+	width: 35px;
+}
+
+/* content task */
+.content-task {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
