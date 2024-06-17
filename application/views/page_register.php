@@ -102,19 +102,28 @@
     </section>
 
     <!-- JS dan Sweet Alert -->
-    <!-- <script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Registrasi Berhasil',
-        text: 'Silakan login untuk melanjutkan',
-        showConfirmButton: false,
-        timer: 2000
-    }).then((result) => {
-        if (result.dismiss === Swal.DismissReason.timer) {
-            window.location.href = '<?= site_url('login') ?>';
-        }
-    });
-    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            Swal.fire({
+                icon: 'success',
+                title: 'Registrasi Berhasil',
+                text: 'Silakan login untuk melanjutkan',
+                showConfirmButton: false,
+                timer: 4000
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location.href = '<?= site_url('welcome/login') ?>';
+                }
+            });
+            setTimeout(() => {
+                event.target.submit();
+            }, 4000); // Tunda selama durasi alert
+        });
+    </script>
+      
+
 </body>
 
 </html>
