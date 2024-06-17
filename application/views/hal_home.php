@@ -18,7 +18,11 @@
 
 <body>
     <div class="sidebar">
+<<<<<<< HEAD
+        <img class="logo" src="<?= base_url('assets/img/Logo-homepage.png')?>" alt="Logo">
+=======
         <img class="logo" src="<?= base_url('assets/img/Logo-home.png') ?>" alt="Logo">
+>>>>>>> 79db5a87ad46a4e23824fe1025b5580ef9d7969a
 
 
         <div class="menu-content">
@@ -87,7 +91,7 @@
                 </div>
             </a>
 
-            <a href="">
+            <a href="<?= base_url('TaskController') ?>">
                 <div class="menu-item-content">
                     <img src="<?= base_url('assets/icons/add-create.svg') ?>" alt="Home">
                 </div>
