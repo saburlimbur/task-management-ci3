@@ -5,18 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manaement - Registrasi</title>
+    <title>Task Management - Registrasi</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alata&display=swap">
     <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="<?= base_url('assets/css/sweetalert2.min.css') ?>">
     <script src="<?= base_url('assets/js/sweetalert2.all.min.js') ?>"></script>
     <!--  -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="<?= base_url('assets/css/login.css')?>">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -28,7 +30,6 @@
             </div>
 
             <!-- <div class="heading-text">
-
                 <h3>Let’s create your account</h3>
                 <p>Sign up now to manage your tasks.</p>
             </div> -->
@@ -76,13 +77,7 @@
                         </div>
                     </div>
 
-
-
-
                     <div class="terms" id="terms">
-                        <!-- <input type="checkbox" required /> -->
-                        <!-- <p>By signing up. I have read and agree to Task Management <span>Terms</span> and <span>Privacy
-                                Policy</span></p> -->
                         <p>Already have an account? <span><a href="<?= base_url('welcome/login') ?>"> Login</a></span>
                         </p>
                     </div>
@@ -90,39 +85,75 @@
                     <button type="submit" class="btn-sign-up">Register</button>
                 </form>
             </div>
-
-
-
         </div>
 
         <div class="right">
             <img src="<?= base_url('assets/img/beavis.png')?>" alt="">
         </div>
-
     </section>
 
     <!-- JS dan Sweet Alert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.getElementById('registrationForm').addEventListener('submit', function(event) {
-            event.preventDefault(); 
-            Swal.fire({
-                icon: 'success',
-                title: 'Registrasi Berhasil',
-                text: 'Silakan login untuk melanjutkan',
-                showConfirmButton: false,
-                timer: 4000
-            }).then((result) => {
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    window.location.href = '<?= site_url('welcome/login') ?>';
+    function periksaFieldDanRegistrasi() {
+        // Mengambil semua input field dari form
+        var fields = document.querySelectorAll('form input');
+        var allFilled = true;
+
+        // memeriksa setiap field apakah telah terisi
+        fields.forEach(function(field) {
+            if (field.value.trim() === '') {
+                allFilled = false;
+            }
+        });
+
+        // validasi dgn perulangan if. jika semua field terisi, kirim data menggunakan AJAX akan tampil alert berikut
+        if (allFilled) {
+            var formData = $('#registrationForm').serialize(); // lalu mengambil data dari form
+
+            $.ajax({
+                type: 'POST', // dgn POST method type
+                url: $('#registrationForm').attr('action'),
+                data: formData, // yang mengirim formData dari form
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Registrasi Berhasil',
+                        text: 'Silakan login untuk melanjutkan',
+                        showConfirmButton: false,
+                        timer: 500
+                    }).then((result) => {
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            window.location.href =
+                                '<?= site_url('welcome/login') ?>'; // jika benar saat register maka ke halaman login
+                        }
+                    });
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Terjadi kesalahan saat mengirim data',
+                        showConfirmButton: true
+                    });
                 }
             });
-            setTimeout(() => {
-                event.target.submit();
-            }, 4000); // Tunda selama durasi alert
-        });
+        } else {
+            // jika ada field yang belum terisi, tampilkan pesan error message
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Harap isi semua field',
+                showConfirmButton: true
+            });
+        }
+    }
+
+    // Panggil fungsi ini saat form registrasi disubmit
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Mencegah submit form default
+        periksaFieldDanRegistrasi();
+    });
     </script>
-      
 
 </body>
 

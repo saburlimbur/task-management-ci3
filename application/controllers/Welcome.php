@@ -26,22 +26,22 @@ class Welcome extends CI_Controller {
         // menggunakan library form validation dari dokumentasi code igniter
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
-		
+
 		if ($this->form_validation->run() === FALSE) {
 			$this->load->view('page_login');
 		} else {
 			$email = $this->input->post('email');
 			$password = $this->input->post('password');
-	
+
 			$user = $this->AuthModel->cekEmail($email);
-	
+
 			if ($user->num_rows() === 1) {
 				$user_data = $user->row();
-				
+
 				if (password_verify($password, $user_data->password)) {
 					// Set session login
 					$this->session->set_userdata('logged_in', FALSE);
-					
+
 					// Set flashdata untuk pesan sukses
 					$this->session->set_flashdata('success', 'Berhasil Login');
 					redirect('homePage');
@@ -57,7 +57,7 @@ class Welcome extends CI_Controller {
 			}
 		}
 	}
-	
+
 
     public function index()
     {

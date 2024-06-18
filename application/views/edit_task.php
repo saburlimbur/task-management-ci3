@@ -18,7 +18,9 @@
 
 <body>
     <div class="sidebar">
-        <img class="logo" src="<?= base_url('assets/img/Logo-home.png')?>" alt="Logo">
+        <a href="">
+            <img class="logo" src="<?= base_url('assets/img/Logo-home.png')?>" alt="Logo">
+        </a>
 
 
         <div class="menu-content">
@@ -96,62 +98,65 @@
         </div>
     </div>
 
-    <section class="col-lg-8 content-task card card-outline card-primary" style="height: 75vh; margin-top: 65px; margin-left: 180px;" >
-                    <?php echo form_open('TaskController/update/' . $task['id']); ?>
-                    <input type="hidden" name="id" value="<?php echo $task['id']; ?>">    
-                    
-                    <form>
-                        <div class="form-row">
-                            <!-- form title -->
-                            <div class="form-group col-md-6">
-                                <label for="title">Title</label>
-                                <input type="text" class="form-control" id="title" name="title" value="<?php echo $task['title']; ?>" required>
-                                <?= form_error('title', '<small class="text-danger">', '</small>') ?>
-                            </div>
-                            <!-- form status -->
-                            <div class="form-group col-md-6">
-                                <label for="status">Status</label>
-                                <select class="form-control" id="status" name="status" required>
-                                    <option value="Pending" <?php echo $task['status'] == 'Pending' ? 'selected' : ''; ?>>Pending</option>
-                                    <option value="In Progress" <?php echo $task['status'] == 'In Progress' ? 'selected' : ''; ?>>In Progress</option>
-                                    <option value="Completed" <?php echo $task['status'] == 'Completed' ? 'selected' : ''; ?>>Completed</option>
-                                </select>
-                                <?= form_error('status', '<small class="text-danger">', '</small>') ?>
-                            </div>
-                        </div>
-                        <!-- form status -->
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" id="description" name="description" required style="height: 120px;"><?php echo $task['description']; ?></textarea>
-                            <?= form_error('description', '<small class="text-danger">', '</small>') ?>
-                        </div>
-                        
-                        <!-- form Date Start -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="" class="control-label">Start Date</label>
-                                    <input type="date" class="form-control form-control-sm" autocomplete="off" name="start_date" value="<?php echo isset($start_date) ? date("Y-m-d",strtotime($start_date)) : '' ?>">
-                                </div>
-                            </div>
-                            
-                        <!-- form Date End -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="control-label">End Date</label>
-                                <input type="date" class="form-control form-control-sm" autocomplete="off" name="end_date" value="<?php echo isset($end_date) ? date("Y-m-d",strtotime($end_date)) : '' ?>">
-                            </div>
-                        </div>
-                        <!-- button -->
-                        <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                             <?= form_close(); ?>
-                        </div>
-                    </form>
+    <section class="col-lg-8 content-task card card-outline card-primary"
+        style="height: 75vh; margin-top: 65px; margin-left: 180px;">
+        <?php echo form_open('TaskController/update/' . $task['id']); ?>
+        <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
+
+        <form>
+            <div class="form-row">
+                <!-- form title -->
+                <div class="form-group col-md-6">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title"
+                        value="<?php echo $task['title']; ?>" required>
+                    <?= form_error('title', '<small class="text-danger">', '</small>') ?>
+                </div>
+                <!-- form status -->
+                <div class="form-group col-md-6">
+                    <label for="status">Status</label>
+                    <select class="form-control" id="status" name="status" required>
+                        <option value="Pending" <?php echo $task['status'] == 'Pending' ? 'selected' : ''; ?>>Pending
+                        </option>
+                        <option value="In Progress" <?php echo $task['status'] == 'In Progress' ? 'selected' : ''; ?>>In
+                            Progress</option>
+                        <option value="Completed" <?php echo $task['status'] == 'Completed' ? 'selected' : ''; ?>>
+                            Completed</option>
+                    </select>
+                    <?= form_error('status', '<small class="text-danger">', '</small>') ?>
+                </div>
+            </div>
+            <!-- form status -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" required
+                    style="height: 120px;"><?php echo $task['description']; ?></textarea>
+                <?= form_error('description', '<small class="text-danger">', '</small>') ?>
+            </div>
+
+            <!-- form Date Start -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="control-label">Start Date</label>
+                        <input type="date" class="form-control form-control-sm" autocomplete="off" name="start_date"
+                            value="<?php echo isset($start_date) ? date("Y-m-d",strtotime($start_date)) : '' ?>">
+                    </div>
+                </div>
+
+                <!-- form Date End -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="control-label">End Date</label>
+                        <input type="date" class="form-control form-control-sm" autocomplete="off" name="end_date"
+                            value="<?php echo isset($end_date) ? date("Y-m-d",strtotime($end_date)) : '' ?>">
+                    </div>
+                </div>
+                <!-- button -->
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <?= form_close(); ?>
+                </div>
+        </form>
     </section>
 </body>
-                    
-                
-
-
-
