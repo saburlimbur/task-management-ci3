@@ -23,11 +23,6 @@
 
 
         <div class="menu-content">
-            <div class="menu-item-search">
-                <img src="<?= base_url('assets/icons/search.svg') ?>" alt="Home">
-                <span>Search</span>
-            </div>
-
             <div class="menu-item">
                 <img src="<?= base_url('assets/icons/home.svg') ?>" alt="Home">
                 <span>Home</span>
@@ -54,13 +49,16 @@
 
         <div class="user-info">
             <img src="<?= base_url('assets/img/users.png') ?>" alt="User">
-            <span>Fikih Aldiansyah
-                <p class="admin">Admin<br></p>
+            <span>
+                <?= $this->session->userdata('username') ?>
+                <p class="admin">Users<br></p>
+                <!-- <p class="admin"><?= $this->session->userdata('user_role') ?><br></p> -->
             </span>
             <a href="<?= base_url('welcome/index') ?>" onclick="return confirm('Apakah yakin ingin keluar?');">
                 <img class="logout-icon" src="<?= base_url('assets/icons/logout.svg') ?>" alt="Logout">
             </a>
         </div>
+
 
 
     </div>
@@ -84,17 +82,54 @@
                 </div>
             </a>
 
-            <a href="">
-                <div class="menu-item-content">
-                    <img src="<?= base_url('assets/icons/sending.svg') ?>" alt="Home">
-                </div>
-            </a>
 
-            <a href="<?= base_url('TaskController') ?>">
+            <a href="<?= base_url('TaskController/create') ?>">
                 <div class="menu-item-content">
                     <img src="<?= base_url('assets/icons/add-create.svg') ?>" alt="Home">
                 </div>
             </a>
+
+
+            <a href="#" data-toggle="modal" data-target="#profileModal">
+                <div class="menu-item-content">
+                    <img src="<?= base_url('assets/img/users.png') ?>" alt="Profile">
+                </div>
+            </a>
+
+            <!-- Profile Modal -->
+            <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- User Profile Content -->
+                            <p><strong>Username:</strong> <span
+                                    id="profile-username"><?= $this->session->userdata('username') ?></span></p>
+                            <p><strong>Email:</strong> <span
+                                    id="profile-email"><?= $this->session->userdata('email') ?></span></p>
+                            <p><strong>User Role: Users</strong> <span
+                                    id="profile-role"><?= $this->session->userdata('user_role') ?></span></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- <a href="">
+                <div class="menu-item-content">
+                    <img src="<?= base_url('assets/icons/sending.svg') ?>" alt="Home">
+                </div>
+            </a> -->
 
         </div>
     </div>
@@ -110,6 +145,7 @@
                     <div class="body-card">
                         <!-- display task list -->
                         <?php if (!empty($tasks)) : ?>
+
                         <ul class="list-group task-list">
                             <?php foreach ($tasks as $task) : ?>
                             <li class="list-group-item">
@@ -117,34 +153,31 @@
                                     <strong style="font-size: x-large;"><?= $task['title'] ?></strong>
                                     <div>
                                         <p style="color: #808080; font-size: small;"><?= $task['description'] ?></p>
-
                                         <!-- status progress -->
-                                        <h7>status: <span class="badge badge-<?php if($task['status'] == 'Pending')
-                                                { echo 'warning'; }elseif($task['status'] == 'In Progress')
-                                                { echo 'primary'; }elseif($task['status'] == 'Completed')
-                                                { echo 'success'; } ?>"
-                                                style="border-radius: 15px; padding: 5px;  font-weight: 600;"><?php echo $task['status']; ?></span>
+                                        <h7>status: <span class="badge badge-<?php
+                                                if($task['status'] == 'Pending') { echo 'warning'; }
+                                                elseif($task['status'] == 'In Progress') { echo 'primary'; }
+                                                elseif($task['status'] == 'Completed') { echo 'success'; }
+                                                ?>" style=""><?= $task['status']; ?></span>
                                         </h7>
                                     </div>
-
-
                                     <!-- progress bar -->
                                     <div class="progress mt-2">
                                         <?php
-                                                $status = $task['status'];
-                                                if ($status == 'Pending') {
-                                                    $progress = 20;
-                                                } elseif ($status == 'In Progress') {
-                                                    $progress = 50;
-                                                } elseif ($status == 'Completed') {
-                                                    $progress = 100;
-                                                }
-                                                ?>
+                                        $status = $task['status'];
+                                        if ($status == 'Pending') {
+                                            $progress = 20;
+                                        } elseif ($status == 'In Progress') {
+                                            $progress = 50;
+                                        } elseif ($status == 'Completed') {
+                                            $progress = 100;
+                                        }
+                                        ?>
                                         <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%;"
                                             aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100">
-                                            <?= $progress ?>%</div>
+                                            <?= $progress ?>%
+                                        </div>
                                     </div>
-
                                     <!-- dropdown menu -->
                                     <div class="dropdown" style="position: absolute; top: 0; right: 0;">
                                         <button class="btn btn-secondary btn-lg dropdown-toggle" type="button"
@@ -154,7 +187,7 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item"
-                                                href="<?= site_url('TaskController/update/' . $task['id']) ?>">Edit</a>
+                                                href="<?= site_url('TaskController/edit/' . $task['id']) ?>">Edit</a>
                                             <a class="dropdown-item"
                                                 href="<?= site_url('TaskController/delete/' . $task['id']) ?>"
                                                 onclick="return confirm('Apakah yakin ingin menghapus tugas?');">Hapus</a>
@@ -166,63 +199,32 @@
                                         </style>
                                     </div>
                                 </div>
-                    </div>
-                    </li>
-                    <?php endforeach; ?>
-                    </ul>
-                    <?php else : ?>
+                            </li>
+                            <?php endforeach; ?>
+                        </ul>
 
-                    <div class="card text-center card card-outline card-primary"
-                        style="height: 500px; margin-top: 65px; margin-left: 200px;">
-                        <img class="card-img-top" src="<?= base_url('assets/img/Opsss.png') ?>" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="<?= base_url('TaskController/create') ?>" class="btn btn-primary">Add Task</a>
+                        <?php else : ?>
+                        <div class="card text-center card card-outline card-primary"
+                            style="height: 500px; margin-top: 65px; margin-left: 200px;">
+                            <img class="card-img-top" src="<?= base_url('assets/img/Opsss.png') ?>"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">No tasks found</h5>
+                                <p class="card-text">There are no tasks available.</p>
+                                <a href="<?= base_url('TaskController/create') ?>" class="btn btn-primary">Add Task</a>
+                            </div>
                         </div>
                         <?php endif; ?>
                     </div>
 
-
-
                 </div>
                 <div class="col-md-4">
-
-                    <!-- Form untuk create atau edit task -->
-                    <!-- <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Create / Edit Task</h5>
-                            <?php echo form_open('TaskController/create'); ?>
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" class="form-control" id="title" name="title"
-                                    value="<?= set_value('title') ?>" required>
-                                <?= form_error('title', '<small class="text-danger">', '</small>') ?>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea class="form-control" id="description" name="description"
-                                    required><?= set_value('description') ?></textarea>
-                                <?= form_error('description', '<small class="text-danger">', '</small>') ?>
-                            </div>
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select class="form-control" id="status" name="status" required>
-                                    <option value="Pending">Pending</option>
-                                    <option value="In Progress">In Progress</option>
-                                    <option value="Completed">Completed</option>
-                                </select>
-                                <?= form_error('status', '<small class="text-danger">', '</small>') ?>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <?= form_close(); ?>
-                        </div> -->
+                    <!-- Placeholder for form to create or edit task -->
+                    <!-- This section is intended for form creation or editing of tasks -->
                 </div>
-
             </div>
         </div>
-        </div>
+
 
     </section>
 
@@ -234,6 +236,24 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    // pop up pada profile
+    $(document).ready(function() {
+        $('#profileModal').on('show.bs.modal', function(event) {
+            $.ajax({
+                url: '<?= site_url('welcome/get_profile') ?>', // URL untuk mendapatkan data profil
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#profile-username').text(data.username);
+                    $('#profile-email').text(data.email);
+                    $('#profile-role').text(data.user_role);
+                },
+                error: function() {
+                    alert('Gagal memuat data profil.');
+                }
+            });
+        });
+    });
     </script>
 </body>
 

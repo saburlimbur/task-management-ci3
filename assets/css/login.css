@@ -107,7 +107,7 @@ body {
 	color: #999;
 }
 
-.password-input {
+/* .password-input {
 	position: relative;
 }
 
@@ -124,7 +124,41 @@ body {
 
 .group input:focus {
 	outline: none;
-	border-color: #3f51b5; /* Dark blue border on focus */
+	border-color: #3f51b5; 
+} */
+
+/* user role */
+.forms .user-role {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.forms label {
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+}
+
+.forms select {
+	width: 400px; /* Sesuaikan lebar input dengan kebutuhan */
+	height: 40px;
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 14px;
+}
+
+.forms select:focus {
+	outline: none;
+	border-color: #007bff;
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.forms .error-message {
+	color: red;
+	font-size: 12px;
+	margin-top: 5px;
 }
 
 .terms {

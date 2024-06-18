@@ -18,15 +18,10 @@
 <body>
     <div class="sidebar">
         <a href="">
-            <img class="logo" src="<?= base_url('assets/img/Logo-home.png')?>" alt="Logo">
+            <img class="logo" src="<?= base_url('assets/img/Logo-homepage.png')?>" alt="Logo">
         </a>
 
         <div class="menu-content">
-            <div class="menu-item-search">
-                <img src="<?= base_url('assets/icons/search.svg')?>" alt="Home">
-                <span>Search</span>
-            </div>
-
             <div class="menu-item">
                 <img src="<?= base_url('assets/icons/home.svg')?>" alt="Home">
                 <span>Home</span>
@@ -52,13 +47,16 @@
 
         <div class="user-info">
             <img src="<?= base_url('assets/img/users.png') ?>" alt="User">
-            <span>Fikih Aldiansyah
-                <p class="admin">Admin<br></p>
+            <span>
+                <?= $this->session->userdata('username') ?>
+                <p class="admin">Users<br></p>
+                <!-- <p class="admin"><?= $this->session->userdata('user_role') ?><br></p> -->
             </span>
             <a href="<?= base_url('welcome/index') ?>" onclick="return confirm('Apakah yakin ingin keluar?');">
                 <img class="logout-icon" src="<?= base_url('assets/icons/logout.svg') ?>" alt="Logout">
             </a>
         </div>
+
     </div>
 
     <div class="main-content">
@@ -89,6 +87,39 @@
                     <img src="<?= base_url('assets/icons/add-create.svg')?>" alt="Home">
                 </div>
             </a>
+
+            <a href="#" data-toggle="modal" data-target="#profileModal">
+                <div class="menu-item-content">
+                    <img src="<?= base_url('assets/img/users.png') ?>" alt="Profile">
+                </div>
+            </a>
+
+            <!-- Profile Modal -->
+            <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- User Profile Content -->
+                            <p><strong>Username:</strong> <span
+                                    id="profile-username"><?= $this->session->userdata('username') ?></span></p>
+                            <p><strong>Email:</strong> <span
+                                    id="profile-email"><?= $this->session->userdata('email') ?></span></p>
+                            <p><strong>User Role:</strong> <span
+                                    id="profile-role"><?= $this->session->userdata('user_role') ?></span></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -150,6 +181,27 @@
 
         <?= form_close(); ?>
     </section>
+
+    <script>
+    // pop up pada profile
+    $(document).ready(function() {
+        $('#profileModal').on('show.bs.modal', function(event) {
+            $.ajax({
+                url: '<?= site_url('welcome/get_profile') ?>', // URL untuk mendapatkan data profil
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#profile-username').text(data.username);
+                    $('#profile-email').text(data.email);
+                    $('#profile-role').text(data.user_role);
+                },
+                error: function() {
+                    alert('Gagal memuat data profil.');
+                }
+            });
+        });
+    });
+    </script>
 </body>
 
 </html>

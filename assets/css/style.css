@@ -14,7 +14,11 @@ body {
 .sidebar {
 	width: 400px;
 	background-color: #ffffff;
-	border-right: 0.8px solid #8e8e8e;
+	/* border-right: 0.8px solid #8e8e8e; */
+	box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+		0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+		0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+		0 100px 80px rgba(0, 0, 0, 0.12);
 	color: #000000;
 	padding: 20px;
 	height: 100vh;
@@ -25,7 +29,7 @@ body {
 }
 
 .logo {
-	width: 180px;
+	/* width: 180px; */
 	margin: 50px;
 }
 
@@ -34,7 +38,6 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	gap: 50px;
-	align-items: center;
 }
 
 .menu-item {
@@ -44,7 +47,7 @@ body {
 }
 
 .menu-item img {
-	width: 25px;
+	width: 40px;
 	margin-right: 10px;
 }
 
@@ -109,7 +112,7 @@ body {
 	justify-content: space-between;
 	height: 130px;
 	align-items: center;
-	border-bottom: 0.8px solid #8e8e8e;
+	box-shadow: 0 8px -4px rgba(0, 0, 0, 0.048);
 }
 
 .main-content h2 {
@@ -121,7 +124,6 @@ body {
 .wrapper-menu-content {
 	display: flex;
 	gap: 20px;
-	align-items: center;
 	justify-content: center;
 }
 
@@ -157,6 +159,49 @@ body {
 
 .menu-item-content img {
 	width: 35px;
+}
+
+/* style untuk profile */
+.modal-dialog {
+	position: absolute;
+	top: 50px; /* Adjust this value to position modal below button */
+	right: 0;
+	left: 0;
+	margin: auto;
+}
+
+.modal-content {
+	padding: 20px;
+	border-radius: 10px;
+}
+
+/* style pada task content nya */
+.gradient-custom-2 {
+	/* fallback for old browsers */
+	background: #7e40f6;
+
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: -webkit-linear-gradient(
+		to right,
+		rgba(126, 64, 246, 1),
+		rgba(80, 139, 252, 1)
+	);
+
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: linear-gradient(
+		to right,
+		rgba(126, 64, 246, 1),
+		rgba(80, 139, 252, 1)
+	);
+}
+
+.mask-custom {
+	background: rgba(24, 24, 16, 0.2);
+	border-radius: 2em;
+	backdrop-filter: blur(25px);
+	border: 2px solid rgba(255, 255, 255, 0.05);
+	background-clip: padding-box;
+	box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
 }
 
 /* content task */
