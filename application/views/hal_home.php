@@ -18,7 +18,7 @@
 
 <body>
     <div class="sidebar">
-        <img class="logo" src="<?= base_url('assets/img/Logo-homepage.png')?>" alt="Logo">
+        <img class="logo" src="<?= base_url('assets/img/Logo-homepage.png') ?>" alt="Logo">
         <!-- <img class="logo" src="<?= base_url('assets/img/Logo-home.png') ?>" alt="Logo"> -->
 
 
@@ -134,8 +134,7 @@
         </div>
     </div>
 
-    <section class="content-task col-lg-8 content-task card card-outline card-primary"
-        style="height: 75vh; margin-top: 65px; margin-left: 200px;">
+    <section class="content-task col-lg-8 content-task " style="height: 75vh; margin-top: 65px; margin-left: 200px;">
 
         <div class="container mt-5">
             <div class="row">
@@ -144,10 +143,10 @@
                     <!-- Task list -->
                     <div class="body-card">
                         <!-- display task list -->
-                        <?php if (!empty($tasks)) : ?>
+                        <?php if (!empty($tasks)): ?>
 
                         <ul class="list-group task-list">
-                            <?php foreach ($tasks as $task) : ?>
+                            <?php foreach ($tasks as $task): ?>
                             <li class="list-group-item">
                                 <div class="task-info">
                                     <strong style="font-size: x-large;"><?= $task['title'] ?></strong>
@@ -155,31 +154,35 @@
                                         <p style="color: #808080; font-size: small;"><?= $task['description'] ?></p>
                                         <!-- status progress -->
                                         <h7>status: <span class="badge badge-<?php
-                                                if($task['status'] == 'Pending') { echo 'warning'; }
-                                                elseif($task['status'] == 'In Progress') { echo 'primary'; }
-                                                elseif($task['status'] == 'Completed') { echo 'success'; }
+                                                if ($task['status'] == 'Pending') {
+                                                    echo 'warning';
+                                                } elseif ($task['status'] == 'In Progress') {
+                                                    echo 'primary';
+                                                } elseif ($task['status'] == 'Completed') {
+                                                    echo 'success';
+                                                }
                                                 ?>" style=""><?= $task['status']; ?></span>
                                         </h7>
                                     </div>
                                     <!-- progress bar -->
                                     <div class="progress mt-2">
                                         <?php
-                                        $status = $task['status'];
-                                        if ($status == 'Pending') {
-                                            $progress = 20;
-                                        } elseif ($status == 'In Progress') {
-                                            $progress = 50;
-                                        } elseif ($status == 'Completed') {
-                                            $progress = 100;
-                                        }
-                                        ?>
+                                                $status = $task['status'];
+                                                if ($status == 'Pending') {
+                                                    $progress = 20;
+                                                } elseif ($status == 'In Progress') {
+                                                    $progress = 50;
+                                                } elseif ($status == 'Completed') {
+                                                    $progress = 100;
+                                                }
+                                                ?>
                                         <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%;"
                                             aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100">
                                             <?= $progress ?>%
                                         </div>
                                     </div>
                                     <!-- dropdown menu -->
-                                    <div class="dropdown" style="position: absolute; top: 0; right: 0;">
+                                    <div class="dropdown" style="position: absolute; top: 0; right: 0; ">
                                         <button class="btn btn-secondary btn-lg dropdown-toggle" type="button"
                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false" style="background: none; border: none; color: black;">
@@ -203,8 +206,8 @@
                             <?php endforeach; ?>
                         </ul>
 
-                        <?php else : ?>
-                        <div class="card text-center card card-outline card-primary"
+                        <?php else: ?>
+                        <div class="card text-center card card-outline card-primary mt-5"
                             style="height: 500px; margin-top: 65px; margin-left: 200px;">
                             <img class="card-img-top" src="<?= base_url('assets/img/Opsss.png') ?>"
                                 alt="Card image cap">
