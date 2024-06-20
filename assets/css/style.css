@@ -79,11 +79,15 @@ body {
 	margin-top: 15rem;
 	margin-bottom: 30px;
 	gap: 20px;
+	justify-content: center;
 }
 
 .user-info img {
 	width: 50px;
 	margin-right: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .user-info span {
@@ -215,4 +219,3 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-

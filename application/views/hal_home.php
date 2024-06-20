@@ -52,8 +52,10 @@
             <img src="<?= base_url('assets/img/users.png') ?>" alt="User">
             <span>
                 <?= $this->session->userdata('username') ?>
-                <p class="admin">Users<br></p>
-                <!-- <p class="admin"><?= $this->session->userdata('user_role') ?><br></p> -->
+                <p class="admin">
+                    <?= $this->session->userdata('email') ?><br>
+                </p>
+                <?= $this->session->userdata('user_role') ?><br>
             </span>
             <a href="<?= base_url('welcome/index') ?>" onclick="return confirm('Apakah yakin ingin keluar?');">
                 <img class="logout-icon" src="<?= base_url('assets/icons/logout.svg') ?>" alt="Logout">
@@ -114,8 +116,7 @@
                                     id="profile-username"><?= $this->session->userdata('username') ?></span></p>
                             <p><strong>Email:</strong> <span
                                     id="profile-email"><?= $this->session->userdata('email') ?></span></p>
-                            <p><strong>User Role: Users</strong> <span
-                                    id="profile-role"><?= $this->session->userdata('user_role') ?></span></p>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -137,13 +138,11 @@
 
     <section class="content-task">
 
-
-
         <!-- Task list -->
 
         <!-- display task list -->
         <?php if (!empty($tasks)): ?>
-        <div class="col-text-left">
+        <div class="col-text-center">
             <ul class=" d-flex flex-wrap" list-group list-group-flush" style="gap:26px;">
                 <?php foreach ($tasks as $task): ?>
                 <li class="list-group-item p-2">

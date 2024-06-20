@@ -49,7 +49,9 @@
             <img src="<?= base_url('assets/img/users.png') ?>" alt="User">
             <span>
                 <?= $this->session->userdata('username') ?>
-                <p class="admin">Users<br></p>
+                <p class="admin">
+                    <?= $this->session->userdata('email')?><br>
+                </p>
                 <!-- <p class="admin"><?= $this->session->userdata('user_role') ?><br></p> -->
             </span>
             <a href="<?= base_url('welcome/index') ?>" onclick="return confirm('Apakah yakin ingin keluar?');">
@@ -111,8 +113,7 @@
                                     id="profile-username"><?= $this->session->userdata('username') ?></span></p>
                             <p><strong>Email:</strong> <span
                                     id="profile-email"><?= $this->session->userdata('email') ?></span></p>
-                            <p><strong>User Role:</strong> <span
-                                    id="profile-role"><?= $this->session->userdata('user_role') ?></span></p>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -120,6 +121,7 @@
                     </div>
                 </div>
             </div>
+
 
         </div>
     </div>
@@ -182,7 +184,14 @@
         <?= form_close(); ?>
     </section>
 
-    <script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
     // pop up pada profile
     $(document).ready(function() {
         $('#profileModal').on('show.bs.modal', function(event) {
