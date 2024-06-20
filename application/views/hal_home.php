@@ -14,6 +14,7 @@
     <!-- Ext CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
 
+
 </head>
 
 <body>
@@ -134,101 +135,95 @@
         </div>
     </div>
 
-    <section class="content-task col-lg-8 content-task " style="height: 75vh; margin-top: 65px; margin-left: 200px;">
+    <section class="content-task">
 
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-md-8">
 
-                    <!-- Task list -->
-                    <div class="body-card">
-                        <!-- display task list -->
-                        <?php if (!empty($tasks)): ?>
 
-                        <ul class="list-group task-list">
-                            <?php foreach ($tasks as $task): ?>
-                            <li class="list-group-item">
-                                <div class="task-info">
-                                    <strong style="font-size: x-large;"><?= $task['title'] ?></strong>
-                                    <div>
-                                        <p style="color: #808080; font-size: small;"><?= $task['description'] ?></p>
-                                        <!-- status progress -->
-                                        <h7>status: <span class="badge badge-<?php
-                                                if ($task['status'] == 'Pending') {
-                                                    echo 'warning';
-                                                } elseif ($task['status'] == 'In Progress') {
-                                                    echo 'primary';
-                                                } elseif ($task['status'] == 'Completed') {
-                                                    echo 'success';
-                                                }
-                                                ?>" style=""><?= $task['status']; ?></span>
-                                        </h7>
-                                    </div>
-                                    <!-- progress bar -->
-                                    <div class="progress mt-2">
-                                        <?php
-                                                $status = $task['status'];
-                                                if ($status == 'Pending') {
-                                                    $progress = 20;
-                                                } elseif ($status == 'In Progress') {
-                                                    $progress = 50;
-                                                } elseif ($status == 'Completed') {
-                                                    $progress = 100;
-                                                }
-                                                ?>
-                                        <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%;"
-                                            aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100">
-                                            <?= $progress ?>%
-                                        </div>
-                                    </div>
-                                    <!-- dropdown menu -->
-                                    <div class="dropdown" style="position: absolute; top: 0; right: 0; ">
-                                        <button class="btn btn-secondary btn-lg dropdown-toggle" type="button"
-                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false" style="background: none; border: none; color: black;">
-                                            &#8942;
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item"
-                                                href="<?= site_url('TaskController/edit/' . $task['id']) ?>">Edit</a>
-                                            <a class="dropdown-item"
-                                                href="<?= site_url('TaskController/delete/' . $task['id']) ?>"
-                                                onclick="return confirm('Apakah yakin ingin menghapus tugas?');">Hapus</a>
-                                        </div>
-                                        <style>
-                                        .dropdown-toggle::after {
-                                            display: none;
-                                        }
-                                        </style>
-                                    </div>
-                                </div>
-                            </li>
-                            <?php endforeach; ?>
-                        </ul>
+        <!-- Task list -->
 
-                        <?php else: ?>
-                        <div class="card text-center card card-outline card-primary mt-5"
-                            style="height: 500px; margin-top: 65px; margin-left: 200px;">
-                            <img class="card-img-top" src="<?= base_url('assets/img/Opsss.png') ?>"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">No tasks found</h5>
-                                <p class="card-text">There are no tasks available.</p>
-                                <a href="<?= base_url('TaskController/create') ?>" class="btn btn-primary">Add Task</a>
+        <!-- display task list -->
+        <?php if (!empty($tasks)): ?>
+        <div class="col-text-left">
+            <ul class=" d-flex flex-wrap" list-group list-group-flush" style="gap:26px;">
+                <?php foreach ($tasks as $task): ?>
+                <li class="list-group-item p-2">
+                    <div class="task-info">
+                        <strong style="font-size: x-large;"><?= $task['title'] ?></strong>
+                        <div>
+                            <p style="color: #808080; font-size: small;"><?= $task['description'] ?></p>
+                            <!-- status progress -->
+                            <h7>status: <span class="badge badge-<?php
+                                    if ($task['status'] == 'Pending') {
+                                        echo 'warning';
+                                    } elseif ($task['status'] == 'In Progress') {
+                                        echo 'primary';
+                                    } elseif ($task['status'] == 'Completed') {
+                                        echo 'success';
+                                    }
+                                    ?>" style=""><?= $task['status']; ?></span>
+                            </h7>
+                        </div>
+                        <!-- progress bar -->
+                        <div class="progress mt-2">
+                            <?php
+                                    $status = $task['status'];
+                                    if ($status == 'Pending') {
+                                        $progress = 20;
+                                    } elseif ($status == 'In Progress') {
+                                        $progress = 50;
+                                    } elseif ($status == 'Completed') {
+                                        $progress = 100;
+                                    }
+                                    ?>
+                            <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%;"
+                                aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100">
+                                <?= $progress ?>%
                             </div>
                         </div>
-                        <?php endif; ?>
+                        <!-- dropdown menu -->
+                        <div class="dropdown" style="position: absolute; top: 0; right: 0; ">
+                            <button class="btn btn-secondary btn-lg dropdown-toggle" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" style="background: none; border: none; color: black;">
+                                &#8942;
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item"
+                                    href="<?= site_url('TaskController/edit/' . $task['id']) ?>">Edit</a>
+                                <a class="dropdown-item" href="<?= site_url('TaskController/delete/' . $task['id']) ?>"
+                                    onclick="return confirm('Apakah yakin ingin menghapus tugas?');">Hapus</a>
+                            </div>
+                            <style>
+                            .dropdown-toggle::after {
+                                display: none;
+                            }
+                            </style>
+                        </div>
                     </div>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php else: ?>
 
-                </div>
-                <div class="col-md-4">
-                    <!-- Placeholder for form to create or edit task -->
-                    <!-- This section is intended for form creation or editing of tasks -->
-                </div>
+        <?php endif; ?>
+
+
+    </section>
+
+    <section class="content-task">
+        <?php if (!empty($tasks)): ?>
+        <?php else: ?>
+        <div class="card text-center card card-outline card-primary"
+            style="height: 500px; margin-top: 150px; margin-left: 400px;">
+            <img class="card-img-top" src="<?= base_url('assets/img/Opsss.png') ?>" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">No tasks found</h5>
+                <p class="card-text">There are no tasks available.</p>
+                <a href="<?= base_url('TaskController/create') ?>" class="btn btn-primary">Add Task</a>
             </div>
         </div>
-
-
+        <?php endif; ?>
     </section>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -258,6 +253,9 @@
         });
     });
     </script>
+
 </body>
+
+
 
 </html>
