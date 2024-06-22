@@ -20,6 +20,7 @@ class TaskController extends CI_Controller {
         $this->form_validation->set_rules('description', 'Description', 'required');  //  validasi description wajib diisi
         $this->form_validation->set_rules('status', 'Status', 'required');  // Aturan validasi status wajib diisi
 
+        
         if ($this->form_validation->run() === FALSE) { // jika
             $this->load->view('add_task');  //  validasi gagal, tampilkan kembali halaman 'hal_home' (index)
         } else {
@@ -28,6 +29,7 @@ class TaskController extends CI_Controller {
                 'title' => $this->input->post('title'),
                 'description' => $this->input->post('description'),
                 'status' => $this->input->post('status')
+                
             ];
             // Panggil model TaskModel untuk menyimpan data tugas baru ke database
             $this->TaskModel->insertTask($data);

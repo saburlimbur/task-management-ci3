@@ -24,10 +24,13 @@
 
 
         <div class="menu-content">
-            <div class="menu-item">
-                <img src="<?= base_url('assets/icons/home.svg') ?>" alt="Home">
-                <span>Home</span>
-            </div>
+
+            <a href="<?= base_url('homePage') ?>">
+                <div class="menu-item">
+                    <img src="<?= base_url('assets/icons/home.svg') ?>" alt="My Tasks">
+                    <span>Home</span>
+                </div>
+            </a>
 
             <a href="<?= base_url('TaskController') ?>">
                 <div class="menu-item">
@@ -103,29 +106,27 @@
             <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
+                    <div class="modal-content card">
+                        <div class="card-header">
                             <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <!-- User Profile Content -->
+                        <div class="card-body text-center">
+                            <img src="<?= base_url('assets/img/users.png') ?>" alt="Profile Photo"
+                                class="profile-photo mb-3">
                             <p><strong>Username:</strong> <span
                                     id="profile-username"><?= $this->session->userdata('username') ?></span></p>
                             <p><strong>Email:</strong> <span
                                     id="profile-email"><?= $this->session->userdata('email') ?></span></p>
-
                         </div>
-                        <div class="modal-footer">
+                        <div class="card-footer text-right">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-
 
             <!-- <a href="">
                 <div class="menu-item-content">
@@ -136,73 +137,82 @@
         </div>
     </div>
 
-    <section class="content-task">
+    <!-- Task list -->
+    <section class="content-task col-lg-8 content-task card card-outline card-primary"
+        style="height: 75vh; margin-top: 65px; margin-left: 180px;">
 
-        <!-- Task list -->
 
         <!-- display task list -->
         <?php if (!empty($tasks)): ?>
-        <div class="col-text-center">
-            <ul class=" d-flex flex-wrap" list-group list-group-flush" style="gap:26px;">
-                <?php foreach ($tasks as $task): ?>
-                <li class="list-group-item p-2">
-                    <div class="task-info">
-                        <strong style="font-size: x-large;"><?= $task['title'] ?></strong>
-                        <div>
-                            <p style="color: #808080; font-size: small;"><?= $task['description'] ?></p>
-                            <!-- status progress -->
-                            <h7>status: <span class="badge badge-<?php
-                                    if ($task['status'] == 'Pending') {
-                                        echo 'warning';
-                                    } elseif ($task['status'] == 'In Progress') {
-                                        echo 'primary';
-                                    } elseif ($task['status'] == 'Completed') {
-                                        echo 'success';
-                                    }
-                                    ?>" style=""><?= $task['status']; ?></span>
-                            </h7>
-                        </div>
-                        <!-- progress bar -->
-                        <div class="progress mt-2">
-                            <?php
-                                    $status = $task['status'];
-                                    if ($status == 'Pending') {
-                                        $progress = 20;
-                                    } elseif ($status == 'In Progress') {
-                                        $progress = 50;
-                                    } elseif ($status == 'Completed') {
-                                        $progress = 100;
-                                    }
-                                    ?>
-                            <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%;"
-                                aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100">
-                                <?= $progress ?>%
-                            </div>
-                        </div>
-                        <!-- dropdown menu -->
-                        <div class="dropdown" style="position: absolute; top: 0; right: 0; ">
-                            <button class="btn btn-secondary btn-lg dropdown-toggle" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" style="background: none; border: none; color: black;">
-                                &#8942;
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item"
-                                    href="<?= site_url('TaskController/edit/' . $task['id']) ?>">Edit</a>
-                                <a class="dropdown-item" href="<?= site_url('TaskController/delete/' . $task['id']) ?>"
-                                    onclick="return confirm('Apakah yakin ingin menghapus tugas?');">Hapus</a>
-                            </div>
-                            <style>
-                            .dropdown-toggle::after {
-                                display: none;
-                            }
-                            </style>
+        <div class="container">
+            <div class="col-md-12 col-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Task Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <th class="text-center">
+
+                                        </th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <?php if (!empty($tasks)): ?>
+                                    <?php foreach ($tasks as $task): ?>
+                                    <tr>
+                                        <td class="p-0 text-center">
+
+                                        </td>
+                                        <td><?= $task['title'] ?></td>
+                                        <td><?= $task['description'] ?></td>
+                                        <td>
+                                            <span class="badge badge-<?php
+                                                if ($task['status'] == 'Pending') {
+                                                    echo 'warning';
+                                                } elseif ($task['status'] == 'In Progress') {
+                                                    echo 'primary';
+                                                } elseif ($task['status'] == 'Completed') {
+                                                    echo 'success';
+                                                }
+                                            ?>">
+                                                <?= $task['status'] ?>
+                                            </span>
+                                        </td>
+
+
+
+                                        <td>
+                                            <a class="btn btn-primary btn-action mr-1"
+                                                href="<?= site_url('TaskController/edit/' . $task['id']) ?>"
+                                                data-toggle="tooltip" title="Edit"><img
+                                                    src="<?= base_url('assets/icons/Edit.svg') ?>" alt=""></a>
+                                            <a class="btn btn-danger btn-action"
+                                                href="<?= site_url('TaskController/delete/' . $task['id']) ?>"
+                                                data-toggle="tooltip" title="Delete"
+                                                onclick="return confirm('Apakah yakin ingin menghapus tugas?');"><img
+                                                    src="<?= base_url('assets/icons/Delete.svg') ?>" alt=""></a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                    <?php else: ?>
+                                    <tr>
+                                        <td colspan="6" class="text-center">No tasks available</td>
+                                    </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </li>
-                <?php endforeach; ?>
-            </ul>
+                </div>
+            </div>
         </div>
+
         <?php else: ?>
 
         <?php endif; ?>
@@ -210,7 +220,7 @@
 
     </section>
 
-    <section class="content-task">
+    <section class="content-task col-lg-8 content-task card-primary">
         <?php if (!empty($tasks)): ?>
         <?php else: ?>
         <div class="card text-center card card-outline card-primary"

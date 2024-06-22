@@ -100,27 +100,30 @@
             <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
+                    <div class="modal-content card">
+                        <div class="card-header">
                             <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <!-- User Profile Content -->
-                            <p><strong>Username:</strong> <span
-                                    id="profile-username"><?= $this->session->userdata('username') ?></span></p>
-                            <p><strong>Email:</strong> <span
-                                    id="profile-email"><?= $this->session->userdata('email') ?></span></p>
-
+                        <div class="card-body">
+                            <div class="profile-info">
+                                <p><strong>Username:</strong> <span
+                                        id="profile-username"><?= $this->session->userdata('username') ?></span></p>
+                                <p><strong>Email:</strong> <span
+                                        id="profile-email"><?= $this->session->userdata('email') ?></span></p>
+                            </div>
+                            <img src="<?= $this->session->userdata('profile_photo') ?>" alt="Profile Photo"
+                                class="profile-photo">
                         </div>
-                        <div class="modal-footer">
+                        <div class="card-footer text-right">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
             </div>
+
 
 
         </div>
