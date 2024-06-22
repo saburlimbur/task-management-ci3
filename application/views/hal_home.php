@@ -150,7 +150,7 @@
                     <div class="card-header">
                         <h4>Task Details</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <tbody>

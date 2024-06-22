@@ -54,7 +54,6 @@
                         <div class="error-message"><?php echo form_error('email'); ?></div>
                     </div>
 
-
                     <div class="password-form">
                         <label for="password">Password</label>
                         <div class="password-input">

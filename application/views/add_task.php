@@ -137,7 +137,7 @@
             <!-- Create a new Task -->
             <!-- form title -->
             <div class="form-group col-md-6">
-                <label for="title">Judul</label>
+                <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" required>
                 <?= form_error('title', '<small class="text-danger">', '</small>') ?>
             </div>
@@ -155,7 +155,7 @@
 
         <!-- form deskripsi -->
         <div class="form-group">
-            <label for="description">Deskripsi</label>
+            <label for="description">Description</label>
             <textarea class="form-control" id="description" name="description" required
                 style="height: 120px;"></textarea>
             <?= form_error('description', '<small class="text-danger">', '</small>') ?>
@@ -165,7 +165,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="start_date" class="control-label">Tanggal Mulai</label>
+                    <label for="start_date" class="control-label">Start Date</label>
                     <input type="date" class="form-control form-control-sm" autocomplete="off" name="start_date">
                 </div>
             </div>
@@ -173,7 +173,7 @@
             <!-- form Tanggal Selesai -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="end_date" class="control-label">Tanggal Selesai</label>
+                    <label for="end_date" class="control-label"> End Date</label>
                     <input type="date" class="form-control form-control-sm" autocomplete="off" name="end_date">
                 </div>
             </div>
