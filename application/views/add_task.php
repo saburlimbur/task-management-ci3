@@ -22,10 +22,12 @@
         </a>
 
         <div class="menu-content">
-            <div class="menu-item">
-                <img src="<?= base_url('assets/icons/home.svg')?>" alt="Home">
-                <span>Home</span>
-            </div>
+            <a href="<?= base_url('homePage') ?>">
+                <div class="menu-item">
+                    <img src="<?= base_url('assets/icons/home.svg') ?>" alt="My Tasks">
+                    <span>Home</span>
+                </div>
+            </a>
 
             <a href="<?= base_url('TaskController') ?>">
                 <div class="menu-item">
@@ -34,10 +36,12 @@
                 </div>
             </a>
 
-            <div class="menu-item">
-                <img src="<?= base_url('assets/icons/settings.svg')?>" alt="Settings">
-                <span>Settings</span>
-            </div>
+            <a href="<?= base_url('settings_page') ?>">
+                <div class="menu-item">
+                    <img src="<?= base_url('assets/icons/settings.svg') ?>" alt="Settings">
+                    <span>Settings</span>
+                </div>
+            </a>
 
             <div class="menu-item">
                 <img src="<?= base_url('assets/icons/help.svg')?>" alt="Help & Support">

@@ -115,5 +115,13 @@ class Welcome extends CI_Controller {
         $this->session->sess_destroy();
         redirect('login');
     }
+
+    // view pada settings page
+
+    public function settings_page()
+    {
+        $this->load->view('page_settings');
+    }
+
 }
 ?>

@@ -39,12 +39,13 @@
                 </div>
             </a>
 
-            <a href="<?= base_url('settings_page') ?>">
+            <a href="<?= base_url('settings') ?>">
                 <div class="menu-item">
                     <img src="<?= base_url('assets/icons/settings.svg') ?>" alt="Settings">
                     <span>Settings</span>
                 </div>
             </a>
+
 
             <div class="menu-item">
                 <img src="<?= base_url('assets/icons/help.svg') ?>" alt="Help & Support">
@@ -74,6 +75,21 @@
     <div class="main-content">
         <h2>Task Management</h2>
         <div class="wrapper-menu-content">
+
+            <a href="">
+                <div class="menu-item-content">
+                    <img src="<?= base_url('assets/icons/search.svg') ?>" alt="Home">
+                </div>
+            </a>
+
+            <a href="">
+                <div class="menu-item-content-share">
+                    <p>
+                        Share
+                    </p>
+                    <img src="<?= base_url('assets/icons/share.svg') ?>" alt="Home">
+                </div>
+            </a>
 
             <a href="<?= base_url('TaskController/create') ?>">
                 <div class="menu-item-content">
@@ -141,6 +157,7 @@
                             <table class="table table-striped">
                                 <tbody>
                                     <tr>
+                                        <!-- <th>Username</th> -->
                                         <th>Title</th>
                                         <th>Description</th>
                                         <th>Status</th>
@@ -149,7 +166,12 @@
                                     <?php if (!empty($tasks)): ?>
                                     <?php foreach ($tasks as $task): ?>
                                     <tr>
-
+                                        <!-- <td class="p-0 text-center">
+                                            <?= $this->session->userdataO('username') ?>
+                                            <div class="menu-item-content text" class="display: flex">
+                                                <img src="<?= base_url('assets/img/users.png') ?>" alt="Profile">
+                                            </div>
+                                        </td> -->
                                         <td><?= $task['title'] ?></td>
                                         <td><?= $task['description'] ?></td>
                                         <td>
@@ -202,19 +224,84 @@
     </section>
 
     <section class="content-task col-lg-8 content-task card-primary">
-        <?php if (!empty($tasks)): ?>
-        <?php else: ?>
-        <div class="card text-center card card-outline card-primary"
-            style="height: 500px; margin-top: 150px; margin-left: 400px;">
-            <img class="card-img-top" src="<?= base_url('assets/img/Opsss.png') ?>" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">No tasks found</h5>
-                <p class="card-text">There are no tasks available.</p>
-                <a href="<?= base_url('TaskController/create') ?>" class="btn btn-primary">Add Task</a>
+        <div class="wrapper bg-white mt-sm-5" style="height: 50%;">
+            <h4 class="pb-4 border-bottom">Settings</h4>
+
+            <div class="d-flex align-items-start py-3 border-bottom">
+                <img src="<?= base_url('assets/img/users.png') ?>" alt="Profile Photo" class="img-profile">
+                <div class="pl-sm-4 pl-2" id="img-section">
+                    <b>Profile Photo</b>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+
+                </div>
+            </div>
+            <div class="py-2">
+                <div class="row py-2">
+
+                    <div class="col-md-6">
+                        <label for="username">Username</label>
+                        <!-- <input type="text" class="bg-light form-control" placeholder="Steve"> -->
+                        <div class="bg-light form-control"><?= $this->session->userdata('username') ?>
+                            <p class="admin">
+                        </div>
+                    </div>
+
+                    <div class=" col-md-6 pt-md-0 pt-3">
+                        <label for="email">Email</label>
+                        <div class="bg-light form-control"><?= $this->session->userdata('email') ?>
+                            <p class="admin">
+                        </div>
+                    </div>
+                </div>
+                <div class="row py-2">
+                    <div class="col-md-6">
+                        <label for="email">Position</label>
+                        <div class="bg-light form-control">Hacker International
+                            <p class="admin">
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row py-2">
+                    <div class="col-md-6">
+                        <label for="country">Country</label>
+                        <select name="country" id="country" class="bg-light">
+                            <option value="india" selected>India</option>
+                            <option value="usa">USA</option>
+                            <option value="uk">UK</option>
+                            <option value="uae">UAE</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 pt-md-0 pt-3" id="lang">
+                        <label for="language">Language</label>
+                        <div class="arrow">
+                            <select name="language" id="language" class="bg-light">
+                                <option value="english" selected>English</option>
+                                <option value="english_us">English (United States)</option>
+                                <option value="enguk">English UK</option>
+                                <option value="arab">Arabic</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="py-3 pb-4 border-bottom">
+                    <a href="<?= base_url('homePage') ?>">
+                        <button class="btn btn-primary mr-3">Back to Home</button>
+                    </a>
+                </div>
+                <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+                    <div>
+                        <b>Settings for Account pages</b>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                    <div class="ml-auto">
+                        <button class="btn danger">Deactivate</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <?php endif; ?>
     </section>
+
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>

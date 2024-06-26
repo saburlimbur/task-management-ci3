@@ -25,5 +25,7 @@ class TaskModel extends CI_Model {
         $this->db->where('id', $id);  // menentukan task berdasarkan ID
         return $this->db->delete('tasks');  // menghapus data dari tabel 'tasks'
     }
+
+    
 }
 ?>

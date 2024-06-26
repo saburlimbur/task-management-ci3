@@ -56,3 +56,4 @@ $route['default_controller'] = 'welcome';
 $route['login'] = 'welcome/login';
 $route['home'] = 'welcome/homePage';
 $route['homePage'] = 'welcome/homePage';
+$route['settings_page'] = 'welcome/settings_page';
