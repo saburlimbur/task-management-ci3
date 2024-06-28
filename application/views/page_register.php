@@ -47,26 +47,12 @@
                     </div>
 
                     <div class="email-form">
-                        <label for="user-role">User Role</label>
-                        <select name="user-role" id="user-role">
-                            <option value="">Select User Role</option>
-                            <option value="admin" <?php echo set_select('user-role', 'admin'); ?>>Admin</option>
-                            <option value="user" <?php echo set_select('user-role', 'user'); ?>>User</option>
-                        </select>
-                        <!-- error message -->
-                        <div class="error-message"><?php echo form_error('user-role'); ?></div>
-                    </div>
-
-
-
-                    <div class="email-form">
                         <label for="email">Email</label>
                         <input type="email" name="email" placeholder="Enter Your Email"
                             value="<?php echo set_value('email'); ?>" />
                         <!-- error message -->
                         <div class="error-message"><?php echo form_error('email'); ?></div>
                     </div>
-
 
                     <div class="password-form">
                         <label for="password">Password</label>

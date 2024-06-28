@@ -80,7 +80,9 @@ class Welcome extends CI_Controller {
         $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
         // $this->form_validation->set_rules('user-role', 'User Role', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
+        
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+
         $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
     
         // validasi pada form
@@ -113,5 +115,13 @@ class Welcome extends CI_Controller {
         $this->session->sess_destroy();
         redirect('login');
     }
+
+    // view pada settings page
+
+    public function settings_page()
+    {
+        $this->load->view('page_settings');
+    }
+
 }
 ?>
