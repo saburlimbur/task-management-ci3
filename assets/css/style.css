@@ -143,6 +143,18 @@ body {
 	gap: 10px;
 }
 
+.menu-item-content-create {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	background-color: #e8f1ff;
+	padding: 10px 20px;
+	width: 120px;
+	height: 45px;
+	border-radius: 50px;
+	gap: 10px;
+}
+
 .menu-item-content-share:hover {
 	background-color: #cde1ff;
 	transition: 0.5s;
@@ -244,4 +256,9 @@ body {
 .btn-action img {
 	width: 20px;
 	height: 20px;
+}
+
+.sidebar .menu-content a {
+	text-decoration: none !important;
+	color: #000000 !important;
 }

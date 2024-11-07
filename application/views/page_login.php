@@ -39,7 +39,7 @@
 
                     <div class="email-form">
                         <label for="email">Email</label>
-                        <input type="email" name="email" placeholder="Enter Your Email"
+                        <input type="email" autocomplete="off" name="email" placeholder="Enter Your Email"
                             value="<?php echo set_value('email'); ?>" />
                         <!-- error message -->
                         <div class="error-message"><?php echo form_error('email'); ?></div>

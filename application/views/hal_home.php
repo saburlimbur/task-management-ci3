@@ -13,7 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Ext CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
-
+    <!--  css normalize-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
 </head>
 
@@ -25,21 +26,27 @@
 
         <div class="menu-content">
 
-            <a href="<?= base_url('homePage') ?>">
-                <div class="menu-item">
+            <a href="<?= base_url('homePage') ?>"
+                style="text-decoration: none; color: black; transition: color 0.3s ease;"
+                onmouseover="this.style.color='#007bff';" onmouseout="this.style.color='black';">
+                <div class=" menu-item">
                     <img src="<?= base_url('assets/icons/home.svg') ?>" alt="My Tasks">
                     <span>Home</span>
                 </div>
             </a>
 
-            <a href="<?= base_url('TaskController') ?>">
+            <a href="<?= base_url('TaskController') ?>" "
+                style=" text-decoration: none; color: black; transition: color 0.3s ease;"
+                onmouseover="this.style.color='#007bff';" onmouseout="this.style.color='black';">
                 <div class="menu-item">
                     <img src="<?= base_url('assets/icons/task.svg') ?>" alt="My Tasks">
                     <span>My Tasks</span>
                 </div>
             </a>
 
-            <a href="<?= base_url('settings_page') ?>">
+            <a href="<?= base_url('settings_page') ?>" "
+                style=" text-decoration: none; color: black; transition: color 0.3s ease;"
+                onmouseover="this.style.color='#007bff';" onmouseout="this.style.color='black';">
                 <div class="menu-item">
                     <img src="<?= base_url('assets/icons/settings.svg') ?>" alt="Settings">
                     <span>Settings</span>
@@ -128,10 +135,22 @@
         style="height: 75vh; margin-top: 65px; margin-left: 180px;">
 
 
+        <!-- <a href="<?= base_url('TaskController/create') ?>"
+            style="width: 150px; justify-content: flex-start; display: flex; text-decoration: none;">
+            <div class="menu-item-content-share"
+                style="width: 150px; justify-content: flex-start; display: flex; text-decoration: none;">
+                <p>
+                    Add Tasks
+                </p>
+                <img src="<?= base_url('assets/icons/add-create.svg') ?>" alt="Home" style="width: 20px">
+            </div>
+        </a> -->
+
+
         <!-- display task list -->
         <?php if (!empty($tasks)): ?>
         <div class="container">
-            <div class="col-md-12 col-12 col-sm-12">
+            <div class="col-md-12 col-12 col-sm-12 mt-3 ">
                 <div class="card">
                     <div class="card-header">
                         <h4>Task Details</h4>

@@ -25,21 +25,27 @@
 
         <div class="menu-content">
 
-            <a href="<?= base_url('homePage') ?>">
+            <a href="<?= base_url('homePage') ?>"
+                style="text-decoration: none; color: black; transition: color 0.3s ease;"
+                onmouseover="this.style.color='#007bff';" onmouseout="this.style.color='black';">
                 <div class="menu-item">
                     <img src="<?= base_url('assets/icons/home.svg') ?>" alt="My Tasks">
                     <span>Home</span>
                 </div>
             </a>
 
-            <a href="<?= base_url('TaskController') ?>">
+            <a href="<?= base_url('TaskController') ?>"
+                style="text-decoration: none; color: black; transition: color 0.3s ease;"
+                onmouseover="this.style.color='#007bff';" onmouseout="this.style.color='black';">
                 <div class="menu-item">
                     <img src="<?= base_url('assets/icons/task.svg') ?>" alt="My Tasks">
                     <span>My Tasks</span>
                 </div>
             </a>
 
-            <a href="<?= base_url('settings') ?>">
+            <a href="<?= base_url('settings_page') ?>"
+                style="text-decoration: none; color: black; transition: color 0.3s ease;"
+                onmouseover="this.style.color='#007bff';" onmouseout="this.style.color='black';">
                 <div class="menu-item">
                     <img src="<?= base_url('assets/icons/settings.svg') ?>" alt="Settings">
                     <span>Settings</span>
@@ -47,7 +53,8 @@
             </a>
 
 
-            <div class="menu-item">
+            <div class="menu-item" style="text-decoration: none; color: black; transition: color 0.3s ease;"
+                onmouseover="this.style.color='#007bff';" onmouseout="this.style.color='black';">
                 <img src="<?= base_url('assets/icons/help.svg') ?>" alt="Help & Support">
                 <span>Help & Support</span>
             </div>
@@ -75,21 +82,6 @@
     <div class="main-content">
         <h2>Task Management</h2>
         <div class="wrapper-menu-content">
-
-            <a href="">
-                <div class="menu-item-content">
-                    <img src="<?= base_url('assets/icons/search.svg') ?>" alt="Home">
-                </div>
-            </a>
-
-            <a href="">
-                <div class="menu-item-content-share">
-                    <p>
-                        Share
-                    </p>
-                    <img src="<?= base_url('assets/icons/share.svg') ?>" alt="Home">
-                </div>
-            </a>
 
             <a href="<?= base_url('TaskController/create') ?>">
                 <div class="menu-item-content">
@@ -292,9 +284,6 @@
                     <div>
                         <b>Settings for Account pages</b>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    </div>
-                    <div class="ml-auto">
-                        <button class="btn danger">Deactivate</button>
                     </div>
                 </div>
             </div>

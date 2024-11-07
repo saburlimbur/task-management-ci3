@@ -9,8 +9,15 @@ class AuthModel extends CI_Model {
 
     public function cekEmail($email)
     {
-        return $this->db->get_where('users', ['email' => $email]);
+        $this->db->where('email', $email);
+        return $this->db->get('users');
     }
+
+    // public function cekUsername($username)
+    // {
+    //     $this->db->where('username', $username);
+    //     return $this->db->get('users');
+    // }
     
 }
 ?>

@@ -26,58 +26,50 @@
     <section class="login">
         <div class="left">
             <div class="brand">
-                <img src="<?= base_url('assets/img/Logo-register.png')?>" alt="">
+                <img src="<?= base_url('assets/img/Logo-register.png')?>" alt="Logo">
             </div>
 
-            <!-- <div class="heading-text">
-                <h3>Let’s create your account</h3>
-                <p>Sign up now to manage your tasks.</p>
-            </div> -->
-
             <div class="form-content">
+                <!-- Form Registrasi -->
                 <form id="registrationForm" action="<?= site_url('welcome/proccess_register') ?>" method="POST"
                     class="forms">
-
                     <div class="email-form">
                         <label for="username">Username</label>
-                        <input type="text" name="username" placeholder="Enter Your Username"
-                            value="<?php echo set_value('username'); ?>" />
-                        <!-- error message -->
-                        <div class="error-message"><?php echo form_error('username'); ?></div>
+                        <input type="text" name="username" id="username" placeholder="Enter Your Username"
+                            value="<?= set_value('username'); ?>" />
+                        <div class="error-message"><?= form_error('username'); ?></div>
                     </div>
 
                     <div class="email-form">
                         <label for="email">Email</label>
-                        <input type="email" name="email" placeholder="Enter Your Email"
-                            value="<?php echo set_value('email'); ?>" />
-                        <!-- error message -->
-                        <div class="error-message"><?php echo form_error('email'); ?></div>
+                        <input type="email" name="email" id="email" placeholder="Enter Your Email"
+                            value="<?= set_value('email'); ?>" />
+                        <div class="error-message"><?= form_error('email'); ?></div>
                     </div>
 
                     <div class="password-form">
                         <label for="password">Password</label>
-                        <div class="password-input">
-                            <input type="password" name="password" id="password" placeholder="Enter Your Password"
-                                value="<?php echo set_value('password'); ?>" />
-
-                            <!-- error message -->
-                            <div class="error-message"><?php echo form_error('password'); ?></div>
-                        </div>
+                        <input type="password" name="password" id="password" placeholder="Enter Your Password"
+                            value="<?= set_value('password'); ?>" />
+                        <div class="error-message"><?= form_error('password'); ?></div>
                     </div>
 
                     <div class="password-form">
                         <label for="confirm_password">Confirm Password</label>
-                        <div class="password-input">
-                            <input type="password" name="confirm_password" id="confirm_password"
-                                placeholder="Confirm Your Password"
-                                value="<?php echo set_value('confirm_password'); ?>" />
-                            <!-- error message -->
-                            <div class="error-message"><?php echo form_error('confirm_password'); ?></div>
-                        </div>
+                        <input type="password" name="confirm_password" id="confirm_password"
+                            placeholder="Confirm Your Password" value="<?= set_value('confirm_password'); ?>" />
+                        <div class="error-message"><?= form_error('confirm_password'); ?></div>
                     </div>
 
+                    <!-- Error Message Email Sudah Terdaftar -->
+                    <?php if($this->session->flashdata('error')): ?>
+                    <div class="alert alert-danger">
+                        <?= $this->session->flashdata('error'); ?>
+                    </div>
+                    <?php endif; ?>
+
                     <div class="terms" id="terms">
-                        <p>Already have an account? <span><a href="<?= base_url('welcome/login') ?>"> Login</a></span>
+                        <p>Already have an account? <span><a href="<?= base_url('welcome/login') ?>">Login</a></span>
                         </p>
                     </div>
 
@@ -87,72 +79,99 @@
         </div>
 
         <div class="right">
-            <img src="<?= base_url('assets/img/beavis.png')?>" alt="">
+            <img src="<?= base_url('assets/img/beavis.png')?>" alt="Image">
         </div>
     </section>
 
-    <!-- JS dan Sweet Alert -->
     <script>
-    function periksaFieldDanRegistrasi() {
-        // Mengambil semua input field dari form
-        var fields = document.querySelectorAll('form input');
-        var allFilled = true;
+    $(document).ready(function() {
+        $('#registrationForm').submit(function(event) {
+            event.preventDefault();
 
-        // memeriksa setiap field apakah telah terisi
-        fields.forEach(function(field) {
-            if (field.value.trim() === '') {
-                allFilled = false;
+            $('.error-message').empty();
+
+            // Get value pada form
+            var username = $('#username').val().trim();
+            var email = $('#email').val().trim();
+            var password = $('#password').val().trim();
+            var confirmPassword = $('#confirm_password').val().trim();
+
+            var valid = true;
+
+            if (username === '') {
+                $('#username').next('.error-message').text('Username is required');
+                valid = false;
             }
-        });
 
-        // validasi dgn perulangan if. jika semua field terisi, kirim data menggunakan AJAX akan tampil alert berikut
-        if (allFilled) {
-            var formData = $('#registrationForm').serialize(); // lalu mengambil data dari form
+            if (email === '') {
+                $('#email').next('.error-message').text('Email is required');
+                valid = false;
+            } else if (!validateEmail(email)) {
+                $('#email').next('.error-message').text('Invalid email format');
+                valid = false;
+            }
+
+            if (password === '') {
+                $('#password').next('.error-message').text('Password is required');
+                valid = false;
+            }
+
+            if (confirmPassword === '') {
+                $('#confirm_password').next('.error-message').text('Confirm password is required');
+                valid = false;
+            } else if (password !== confirmPassword) {
+                $('#confirm_password').next('.error-message').text('Passwords do not match');
+                valid = false;
+            }
+
+            if (!valid) return;
+
+            var formData = $(this).serialize();
 
             $.ajax({
-                type: 'POST', // dgn POST method type
-                url: $('#registrationForm').attr('action'),
-                data: formData, // yang mengirim formData dari form
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: formData,
+                dataType: 'json',
                 success: function(response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Registrasi Berhasil',
-                        text: 'Silakan login untuk melanjutkan',
-                        showConfirmButton: false,
-                        timer: 500
-                    }).then((result) => {
-                        if (result.dismiss === Swal.DismissReason.timer) {
+                    if (response.status === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Registrasi Berhasil',
+                            text: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(function() {
                             window.location.href =
-                                '<?= site_url('welcome/login') ?>'; // jika benar saat register maka ke halaman login
-                        }
-                    });
+                                '<?= site_url('welcome/login') ?>';
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal Registrasi',
+                            text: response.message,
+                            showConfirmButton: true
+                        });
+                    }
                 },
                 error: function() {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Error',
-                        text: 'Terjadi kesalahan saat mengirim data',
+                        title: 'Gagal Registrasi',
+                        text: 'Terjadi masalah saat mengirim data.',
                         showConfirmButton: true
                     });
                 }
             });
-        } else {
-            // Jika ada field yang belum terisi, tampilkan pesan error
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Harap isi semua field',
-                showConfirmButton: true
-            });
-        }
-    }
-
-    // Panggil fungsi ini saat form registrasi disubmit
-    document.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Mencegah submit form default
-        periksaFieldDanRegistrasi();
+        });
     });
+
+    function validateEmail(email) {
+        var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        return re.test(email);
+    }
     </script>
+
 
 </body>
 

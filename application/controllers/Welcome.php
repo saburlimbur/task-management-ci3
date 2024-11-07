@@ -77,33 +77,53 @@ class Welcome extends CI_Controller {
 
     // proses register /proccess_register
     public function proccess_register() {
-        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
-        // $this->form_validation->set_rules('user-role', 'User Role', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
-        
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
-
         $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
     
-        // validasi pada form
+        // Validasi form
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('page_register');
         } else {
-            $data = [
-                'username' => $this->input->post('username'),
-                // 'user_role' => $this->input->post('user-role'), // Ambil nilai user-role dari inputan form
-                'email' => $this->input->post('email'),
-                'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT)
-            ];
+            $email = $this->input->post('email');
+            // Cek apakah email sudah terdaftar
+            $email_check = $this->AuthModel->cekEmail($email);
     
-            $insert = $this->AuthModel->register($data);
-    
-            if ($insert) {
-                // Set flashdata untuk pesan sukses
-                $this->session->set_flashdata('success', 'Registrasi Berhasil');
-                redirect('login'); // Mengarahkan ke halaman login setelah registrasi berhasil
+            if ($email_check->num_rows() > 0) {
+                if ($this->input->is_ajax_request()) {
+                    echo json_encode(['status' => 'error', 'message' => 'Email sudah terdaftar']);
+                    return;
+                } else {
+                    $this->session->set_flashdata('error', 'Email sudah terdaftar');
+                    $this->load->view('page_register');
+                }
             } else {
-                echo 'Terjadi masalah saat registrasi';
+                $data = [
+                    'username' => $this->input->post('username'),
+                    'email' => $this->input->post('email'),
+                    'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT)
+                ];
+    
+                $insert = $this->AuthModel->register($data);
+    
+                if ($insert) {
+                    if ($this->input->is_ajax_request()) {
+                        echo json_encode(['status' => 'success', 'message' => 'Registrasi berhasil, silakan login']);
+                        return;
+                    } else {
+                        $this->session->set_flashdata('success', 'Registrasi Berhasil');
+                        redirect('welcome/login');
+                    }
+                } else {
+                    if ($this->input->is_ajax_request()) {
+                        echo json_encode(['status' => 'error', 'message' => 'Terjadi masalah saat registrasi']);
+                        return;
+                    } else {
+                        $this->session->set_flashdata('error', 'Terjadi masalah saat registrasi');
+                        $this->load->view('page_register');
+                    }
+                }
             }
         }
     }
